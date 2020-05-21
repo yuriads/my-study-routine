@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi'
+import props from 'prop-types';
 
 import api from '../../services/api';
 
@@ -33,10 +34,10 @@ export default function NewSubject() {
     async function handleUpdateSubject(e) {
         e.preventDefault();
         
-        // const id = props.match.params.id;
+        const id = props.match.params;
 
         const data = {
-            // id,
+            id,
             day,
             name,
             start,
@@ -47,7 +48,8 @@ export default function NewSubject() {
             if (day === "") {
                 alert('Por favor, selecione um dia da semana');
             } else {
-                await api.put('subjects', data, {
+                await api.put(`subjects/${id}`, data, {
+                // await api.put(`subjects`, data, {
                     headers: {
                         Authorization: userEmail,
                     }
