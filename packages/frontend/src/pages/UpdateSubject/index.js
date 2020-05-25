@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi'
-import props from 'prop-types';
 
 import api from '../../services/api';
 
@@ -9,12 +8,13 @@ import './styles.css';
 
 import logoImg from '../../assets/logo6.jpeg';
 
-export default function NewSubject() {
+export default function NewSubject(props) {
     const [day, setDay] = useState('');
     const [name, setName] = useState('');
     const [start, setStart] = useState('');
     const [finish, setFinish] = useState('');
     const [success, setSuccess] = useState('');
+    const [subjects, setSubjects] = useState('');
 
     const list = [
         { dia: 'Selecione um dia' },
@@ -31,10 +31,20 @@ export default function NewSubject() {
 
     const userEmail = localStorage.getItem('userEmail');
 
+    useEffect(() => {
+        api.get('profile', {
+            headers: {
+                Authorization: userEmail,
+            }
+        }).then(response => {
+            setSubjects(response.data);
+        });
+    }, [userEmail]);
+
     async function handleUpdateSubject(e) {
         e.preventDefault();
-        
-        const id = props.match.params;
+
+        const id = props.match.params.id;
 
         const data = {
             id,
@@ -49,7 +59,6 @@ export default function NewSubject() {
                 alert('Por favor, selecione um dia da semana');
             } else {
                 await api.put(`subjects/${id}`, data, {
-                // await api.put(`subjects`, data, {
                     headers: {
                         Authorization: userEmail,
                     }
@@ -76,33 +85,35 @@ export default function NewSubject() {
                         Voltar a página inical
                     </Link>
                 </section>
+                {subjects.filter(subject => (subject.id === props.match.params.id))
+                    .map(subject => (
+                        <form key={subject.id} onSubmit={handleUpdateSubject}>
+                            <select value={subject.day} onChange={e => setDay(e.target.value)}>
+                                {list.map((item, index) => (
+                                    <option value={item.dia}>{item.dia}</option>
+                                ))}
+                            </select>
+                            <input
+                                placeholder="Nome da disciplina"
+                                value={subject.name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                            <input
+                                type="time"
+                                placeholder="Horário de início"
+                                value={subject.start}
+                                onChange={e => setStart(e.target.value)}
+                            />
+                            <input
+                                type="time"
+                                placeholder="Horário de término"
+                                value={subject.finish}
+                                onChange={e => setFinish(e.target.value)}
+                            />
 
-                <form onSubmit={handleUpdateSubject}>
-                    <select value={day} onChange={e => setDay(e.target.value)}>
-                        {list.map((item, index) => (
-                            <option value={item.dia}>{item.dia}</option>
-                        ))}
-                    </select>
-                    <input
-                        placeholder="Nome da disciplina"
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                    />
-                    <input
-                        type="time"
-                        placeholder="Horário de início"
-                        value={start}
-                        onChange={e => setStart(e.target.value)}
-                    />
-                    <input
-                        type="time"
-                        placeholder="Horário de término"
-                        value={finish}
-                        onChange={e => setFinish(e.target.value)}
-                    />
-
-                    <button className="button" type="submit">Atualizar</button>
-                </form>
+                            <button className="button" type="submit">Atualizar</button>
+                        </form>
+                    ))}
             </div>
         </div>
     );
