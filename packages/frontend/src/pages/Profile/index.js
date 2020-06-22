@@ -46,22 +46,7 @@ export default function Profile() {
         localStorage.clear();
 
         history.push('/');
-    }
-
-    // var mapped = subjects.map(function (el, i) {
-    //     return { index: i, subject: el };
-    // });
-
-    // mapped.sort(function (a, b) {
-    //     // return a.start - b.start;
-    //     return +(a.start > b.start) || +(a.start === b.start) - 1;
-    // });
-
-    // var result = mapped.map(function (el) {
-    //     return subjects[el.index];
-    // });
-
-    // console.log(result);
+    };
 
     return (
         <div className="profile-container">
@@ -73,7 +58,7 @@ export default function Profile() {
             </header>
 
             <h1>Rotina de estudo</h1>
-            <h2>Semana 1</h2>
+            {/* <h2>Semana 1</h2> */}
 
             <div className="dia-semana">
                 <div >
@@ -84,7 +69,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'segunda'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -98,13 +83,13 @@ export default function Profile() {
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <Link to={`subjects/update/${subject.id}`}>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                             <button type="button">
                                                 <FiEdit size={20} color="1E90FF" />
                                             </button>
@@ -126,7 +111,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'terça'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -135,20 +120,22 @@ export default function Profile() {
                         </tr>
                         {subjects.filter(subject => (subject.day === "terça"))
                             .map(subject => (
-                                <tr>
+                                <tr key={subject.id}>
                                     <td>{subject.name}</td>
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <button type="button">
-                                            <FiEdit size={20} color="1E90FF" />
-                                        </button>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
+                                            <button type="button">
+                                                <FiEdit size={20} color="1E90FF" />
+                                            </button>
+                                        </Link>
                                         <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                             <FiX size={20} color="e02041" />
                                         </button>
@@ -167,7 +154,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'quarta'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -176,20 +163,22 @@ export default function Profile() {
                         </tr>
                         {subjects.filter(subject => (subject.day === "quarta"))
                             .map(subject => (
-                                <tr>
+                                <tr key={subject.id}>
                                     <td>{subject.name}</td>
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <button type="button">
-                                            <FiEdit size={20} color="1E90FF" />
-                                        </button>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
+                                            <button type="button">
+                                                <FiEdit size={20} color="1E90FF" />
+                                            </button>
+                                        </Link>
                                         <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                             <FiX size={20} color="e02041" />
                                         </button>
@@ -208,7 +197,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'quinta'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -217,20 +206,22 @@ export default function Profile() {
                         </tr>
                         {subjects.filter(subject => (subject.day === "quinta"))
                             .map(subject => (
-                                <tr>
+                                <tr key={subject.id}>
                                     <td>{subject.name}</td>
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <button type="button">
-                                            <FiEdit size={20} color="1E90FF" />
-                                        </button>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
+                                            <button type="button">
+                                                <FiEdit size={20} color="1E90FF" />
+                                            </button>
+                                        </Link>
                                         <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                             <FiX size={20} color="e02041" />
                                         </button>
@@ -249,7 +240,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'sexta'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -258,20 +249,22 @@ export default function Profile() {
                         </tr>
                         {subjects.filter(subject => (subject.day === "sexta"))
                             .map(subject => (
-                                <tr>
+                                <tr key={subject.id}>
                                     <td>{subject.name}</td>
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <button type="button">
-                                            <FiEdit size={20} color="1E90FF" />
-                                        </button>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
+                                            <button type="button">
+                                                <FiEdit size={20} color="1E90FF" />
+                                            </button>
+                                        </Link>
                                         <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                             <FiX size={20} color="e02041" />
                                         </button>
@@ -290,7 +283,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'sábado'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -299,20 +292,22 @@ export default function Profile() {
                         </tr>
                         {subjects.filter(subject => (subject.day === "sábado"))
                             .map(subject => (
-                                <tr>
+                                <tr key={subject.id}>
                                     <td>{subject.name}</td>
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <button type="button">
-                                            <FiEdit size={20} color="1E90FF" />
-                                        </button>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
+                                            <button type="button">
+                                                <FiEdit size={20} color="1E90FF" />
+                                            </button>
+                                        </Link>
                                         <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                             <FiX size={20} color="e02041" />
                                         </button>
@@ -331,7 +326,7 @@ export default function Profile() {
                             <th>Início</th>
                             <th>Término</th>
                             <th>
-                                <Link to="/subjects/new">
+                                <Link to={`/subjects/new/${'domingo'}`}>
                                     <button type="button">
                                         <FiPlusCircle size={20} color="1E90FF" />
                                     </button>
@@ -340,20 +335,22 @@ export default function Profile() {
                         </tr>
                         {subjects.filter(subject => (subject.day === "domingo"))
                             .map(subject => (
-                                <tr>
+                                <tr key={subject.id}>
                                     <td>{subject.name}</td>
                                     <td>{subject.start}</td>
                                     <td>{subject.finish}</td>
                                     <td>
-                                        <button type="button">
+                                        {/* <button type="button">
                                             <FiThumbsUp size={20} color="006400" />
                                         </button>
                                         <button type="button">
                                             <FiThumbsDown size={20} color="e02041" />
-                                        </button>
-                                        <button type="button">
-                                            <FiEdit size={20} color="1E90FF" />
-                                        </button>
+                                        </button> */}
+                                        <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
+                                            <button type="button">
+                                                <FiEdit size={20} color="1E90FF" />
+                                            </button>
+                                        </Link>
                                         <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                             <FiX size={20} color="e02041" />
                                         </button>

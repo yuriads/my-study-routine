@@ -15,8 +15,8 @@ export default function Routes() {
                 <Route path="/register" component={Register} />
                 
                 <Route path="/profile" component={Profile} />
-                <Route path="/subjects/new" component={NewSubject} />
-                <Route path="/subjects/update/:id" component={UpdateSubject} />
+                <Route path="/subjects/new/:day" component={NewSubject} />
+                <Route path="/subjects/update/:id/:day/:name/:start/:finish" component={UpdateSubject} />
             </Switch>
         </BrowserRouter>
     );

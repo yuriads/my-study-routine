@@ -7,8 +7,9 @@ module.exports = {
         // buscando todos os subjects que esse usuário criou
         const subjects = await connection('subjects')
             .where('user_email', user_email)
-            .select('*');
-        
+            .select('*')
+            .orderBy('start');
+
         return response.json(subjects);
     }
 };

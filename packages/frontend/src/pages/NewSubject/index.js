@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi'
 
@@ -8,12 +8,15 @@ import './styles.css';
 
 import logoImg from '../../assets/logo6.jpeg';
 
-export default function NewSubject() {
+export default function NewSubject(props) {
     const [day, setDay] = useState('');
     const [name, setName] = useState('');
     const [start, setStart] = useState('');
     const [finish, setFinish] = useState('');
+    const [subjects, setSubjects] = useState([]);
     const [success, setSuccess] = useState('');
+
+
 
     const list = [
         { dia: 'Selecione um dia' },
@@ -30,6 +33,19 @@ export default function NewSubject() {
 
     const userEmail = localStorage.getItem('userEmail');
 
+    useEffect(() => {
+        api.get('profile', {
+            headers: {
+                Authorization: userEmail,
+            }
+        }).then(response => {
+            setSubjects(response.data);
+
+            setDay(props.match.params.day);
+
+        });
+    }, [userEmail]);
+
     async function handleNewSubject(e) {
         e.preventDefault();
 
@@ -43,6 +59,8 @@ export default function NewSubject() {
         try {
             if (day === "") {
                 alert('Por favor, selecione um dia da semana');
+            } if (start > finish) {
+                alert('Horário de início não pode ser maior que o horário de término!');
             } else {
                 await api.post('subjects', data, {
                     headers: {
