@@ -12,14 +12,14 @@ module.exports = {
     // inserindo dados dentro da tabela users
     async create(request, response) {
         // fazendo desestruturação para pegar cada um desses dados
-        const { name, email, password, password2 } = request.body;
+        const { email, name, password, password2 } = request.body;
 
         //const id = crypto.randomBytes(4).toString('HEX');// gera 4 caracteres aleatorios e os transforma para hexadecimal
 
         try {
             await connection('users').insert({
-                name,
                 email,
+                name,
                 password,
                 password2,
             });

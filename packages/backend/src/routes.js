@@ -1,6 +1,7 @@
 const express = require('express');
 
 const UserController = require('./controllers/UserController');
+const StudentController = require('./controllers/StudentController')
 const SubjectController = require('./controllers/SubjectController');
 const ProfileController = require('./controllers/ProfileController');
 const SessionController = require('./controllers/SessionController');
@@ -12,6 +13,11 @@ routes.post('/session', SessionController.create);
 
 routes.get('/users', UserController.index);
 routes.post('/users', UserController.create);
+
+routes.get('/students', StudentController.index);
+routes.post('/students', StudentController.create);
+routes.delete('/students/:id', StudentController.delete);
+routes.put('/students/:id', StudentController.update);
 
 routes.get('/profile', ProfileController.index);
 
