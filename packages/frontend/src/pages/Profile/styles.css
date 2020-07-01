@@ -20,23 +20,57 @@
 }
 
 .profile-container header a {
-    width: 60px;
+    width: 100px;
+    margin-left: 8px;
+}
+
+.profile-container header section {
+    display: flex;
     margin-left: auto;
     margin-top: 0;
 }
 
 .profile-container h1 {
-    margin-top: 60px;
-    margin-bottom: 24px;
+    margin-top: 40px;
+    margin-bottom: 0px;
 }
 
 
 .profile-container h2 {
-    padding-bottom: 20px;
+    padding-bottom: 08px;
 }
+
 .profile-container h2:first-child {
     padding-bottom: 20px;
 }
+
+.aluno {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.aluno select {
+    width: 48%;
+    height: 60px;
+    color: #333;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-right: 1%;
+    background-color: #fff;
+}
+
+.aluno a {
+    width: 12%;
+    margin-right: 1%;
+}
+
+.button {
+    margin: 0px;
+}
+
 
 .profile-container table {
     width: 100%;

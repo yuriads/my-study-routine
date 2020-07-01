@@ -8,7 +8,8 @@ module.exports = {
 
         const students = await connection('students')
         .where('user_email', user_email)
-        .select('*');
+        .select('*')
+        .orderBy('name');
 
         response.header('X-Total-Count', count['count(*)']);
 

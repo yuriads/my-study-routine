@@ -31,12 +31,14 @@ export default function NewSubject(props) {
 
     const history = useHistory();
 
+    const id_student = localStorage.getItem('id_student');
     const userEmail = localStorage.getItem('userEmail');
 
     useEffect(() => {
         api.get('profile', {
             headers: {
                 Authorization: userEmail,
+                Authorization_student: id_student
             }
         }).then(response => {
             setSubjects(response.data);
@@ -64,7 +66,7 @@ export default function NewSubject(props) {
             } else {
                 await api.post('subjects', data, {
                     headers: {
-                        Authorization: userEmail,
+                        Authorization: id_student,
                     }
                 });
 

@@ -30,7 +30,6 @@ export default function Logon(){
 
     return (
         <div className="logon-container">
-            {/* <img src={heroesImg} alt="Routine"/> */}
             <img src={logoImg} alt="My Study Routine"/>
             <section className="form">
 

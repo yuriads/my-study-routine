@@ -29,12 +29,14 @@ export default function UpdateSubject(props) {
 
     const history = useHistory();
 
+    const id_student = localStorage.getItem('id_student');
     const userEmail = localStorage.getItem('userEmail');
 
     useEffect(() => {
         api.get('profile', {
             headers: {
                 Authorization: userEmail,
+                Authorization_student: id_student
             }
         }).then(response => {
             setSubjects(response.data);
@@ -74,7 +76,7 @@ export default function UpdateSubject(props) {
             } else {
                 await api.put(`subjects/${id}`, data, {
                     headers: {
-                        Authorization: userEmail,
+                        Authorization: id_student,
                     }
                 });
 
