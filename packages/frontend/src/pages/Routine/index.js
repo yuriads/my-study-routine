@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiPlusCircle, FiEdit, FiX } from 'react-icons/fi';
+import { FiThumbsUp } from 'react-icons/fi';
 import logoImg from '../../assets/logo6.jpeg';
 
 import api from '../../services/api';
@@ -23,24 +23,24 @@ export default function Profile() {
 
     const history = useHistory();
 
-    const userEmail = localStorage.getItem('userEmail');
     const userName = localStorage.getItem('userName');
+    const userId = localStorage.getItem('userId');
 
-    const id_student = localStorage.getItem('id_student');
-    const name_student = localStorage.getItem('name_student');
+    // const id_student = localStorage.getItem('id_student');
+    // const name_student = localStorage.getItem('name_student');
 
 
     //o useEfect recebe dois parâmetros, o primeiro é que a função irá executar e o segundo é quando ela irá executar
     useEffect(() => {
-        api.get('profile', {
+        api.get('profilestudent', {
             headers: {
-                Authorization: userEmail,
-                Authorization_student: id_student
+                Authorization_student: userId,
+                // Authorization_student: id_student
             },
         }).then(response => {
             setSubjects(response.data);
         });
-    }, [userEmail]);
+    }, [userId]);
 
 
     // //listando todos os estudantes cadastrados por um certo usuário
@@ -62,25 +62,25 @@ export default function Profile() {
     //     });
     // }, [userEmail]);
 
-    async function handleDeleteSubject(id) {
-        try {
-            await api.delete(`subjects/${id}`, {
-                headers: {
-                    Authorization: id_student,
-                },
-            });
+    // async function handleDeleteSubject(id) {
+    //     try {
+    //         await api.delete(`subjects/${id}`, {
+    //             headers: {
+    //                 Authorization: id_student,
+    //             },
+    //         });
 
-            //depois usar a font FIRA CODE - FONT LIGATURES
-            setSubjects(subjects.filter(subject => (subject.id !== id)));
-        } catch (err) {
-            alert('Erro ao deletar, tente novamente!');
-        }
-    }
+    //         //depois usar a font FIRA CODE - FONT LIGATURES
+    //         setSubjects(subjects.filter(subject => (subject.id !== id)));
+    //     } catch (err) {
+    //         alert('Erro ao deletar, tente novamente!');
+    //     }
+    // }
 
     function handleLogout() {
         localStorage.clear();
 
-        history.push('/loginpro');
+        history.push('/');
     };
 
     // function handleSelectStudent(e) {
@@ -95,15 +95,15 @@ export default function Profile() {
                 <img src={logoImg} alt="My Stdudy Routine" />
                 <span>Bem vindo, {userName}</span>
                 <section>
-                    {/* <Link className="button">Relatório</Link> */}
-                    <Link to={'/students'}>
+                    <Link className="button">Rendimento</Link>
+                    {/* <Link to={'/students'}>
                         <button className="button">Alunos</button>
-                    </Link>
+                    </Link> */}
                     <Link className="button" onClick={handleLogout}>Sair</Link>
                 </section>
             </header>
 
-            <h1>Aluno: {name_student}</h1>
+            {/* <h1>Aluno: {name_student}</h1> */}
             {/* <h2>Semana 1</h2> */}
 
             {/* <div className="aluno">
@@ -148,13 +148,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'segunda'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
 
@@ -165,14 +165,19 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
-                                                    <FiEdit size={20} color="1E90FF" />
+                                            s        <FiEdit size={20} color="1E90FF" />
                                                 </button>
                                             </Link>
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
+                                            </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
                                     </tr>
@@ -190,13 +195,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'terça'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
 
@@ -207,7 +212,7 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
                                                     <FiEdit size={20} color="1E90FF" />
@@ -215,6 +220,11 @@ export default function Profile() {
                                             </Link>
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
+                                            </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
                                     </tr>
@@ -232,13 +242,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'quarta'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -248,7 +258,7 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
                                                     <FiEdit size={20} color="1E90FF" />
@@ -256,6 +266,11 @@ export default function Profile() {
                                             </Link>
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
+                                            </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
                                     </tr>
@@ -273,13 +288,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'quinta'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -289,7 +304,7 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
                                                     <FiEdit size={20} color="1E90FF" />
@@ -297,6 +312,11 @@ export default function Profile() {
                                             </Link>
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
+                                            </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
                                     </tr>
@@ -314,13 +334,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'sexta'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -330,7 +350,7 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
                                                     <FiEdit size={20} color="1E90FF" />
@@ -338,6 +358,11 @@ export default function Profile() {
                                             </Link>
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
+                                            </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
                                     </tr>
@@ -355,13 +380,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'sábado'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -371,7 +396,7 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
                                                     <FiEdit size={20} color="1E90FF" />
@@ -379,6 +404,11 @@ export default function Profile() {
                                             </Link>
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
+                                            </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
                                     </tr>
@@ -396,13 +426,13 @@ export default function Profile() {
                                 <th>Disciplina</th>
                                 <th>Início</th>
                                 <th>Término</th>
-                                <th>
+                                {/* <th>
                                     <Link to={`/subjects/new/${'domingo'}`}>
                                         <button type="button">
                                             <FiPlusCircle size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                </th>
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -412,7 +442,7 @@ export default function Profile() {
                                         <td>{subject.name}</td>
                                         <td>{subject.start}</td>
                                         <td>{subject.finish}</td>
-                                        <td>
+                                        {/* <td>
                                             <Link to={`subjects/update/${subject.id}/${subject.day}/${subject.name}/${subject.start}/${subject.finish}`}>
                                                 <button type="button">
                                                     <FiEdit size={20} color="1E90FF" />
@@ -421,18 +451,16 @@ export default function Profile() {
                                             <button onClick={() => handleDeleteSubject(subject.id)} type="button">
                                                 <FiX size={20} color="e02041" />
                                             </button>
+                                        </td> */}
+                                        <td>
+                                            <button type="button">
+                                                <FiThumbsUp size={20} color="008000" />
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
                         </tbody>
                     </table>
-                    <div className="obs">
-                        <h2>Observções</h2>
-                        <textarea name="" id="" cols="30" rows="5">
-
-                        </textarea>
-                        <button className="button">Adicionar Obs</button>
-                    </div>
                 </div>
             </div>
         </div>

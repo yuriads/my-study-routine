@@ -30,15 +30,15 @@
     margin-top: 0;
 }
 
-.profile-container h1 {
+.profile-container h2 {
     margin-top: 40px;
     margin-bottom: 0px;
 }
 
 
-.profile-container h2 {
+/* .profile-container h2 {
     padding-bottom: 08px;
-}
+} */
 
 .profile-container caption {
     font-weight: 700;
@@ -110,8 +110,4 @@
 
 .dia-semana button:hover{
     opacity: 0.5;
-}
-
-.obs button {
-    width: 40%;
 }

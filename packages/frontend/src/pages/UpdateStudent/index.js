@@ -8,7 +8,7 @@ import './styles.css';
 
 import logoImg from '../../assets/logo6.jpeg';
 
-export default function NewSubject(props) {
+export default function UpdateSubject(props) {
     const [registration, setRegistration] = useState('');
     const [name, setName] = useState('');
     const [shift, setShift] = useState('');

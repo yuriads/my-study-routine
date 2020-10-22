@@ -8,7 +8,7 @@ import './styles.css';
 
 import logoImg from '../../assets/logo6.jpeg';
 
-export default function NewSubject() {
+export default function NewStudent() {
     const [registration, setRegistration] = useState('');
     const [name, setName] = useState('');
     const [shift, setShift] = useState('');
@@ -47,11 +47,14 @@ export default function NewSubject() {
         };
 
         try {
-            await api.post('students', data, {
+            const response = await api.post('students', data, {
                 headers: {
                     Authorization: userEmail,
                 }
+                
             });
+
+            alert(`Seu ID de acesso: ${response.data.id}`);
 
             history.push('/students');
 

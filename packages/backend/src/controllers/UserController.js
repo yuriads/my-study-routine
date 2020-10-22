@@ -1,5 +1,5 @@
 const connection = require('../database/connection');
-const crypto = require('crypto');
+//const crypto = require('crypto');
 
 module.exports = {
     // listando todos os usuarios

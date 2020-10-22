@@ -1,9 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
+// import Home from './pages/Home';
 import Logon from './pages/Logon';
+import LogonStudent from './pages/LogonStudent';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Routine from './pages/Routine'
 import NewSubject from './pages/NewSubject';
 import UpdateSubject from './pages/UpdateSubject';
 import Student from './pages/Student';
@@ -14,8 +17,14 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={Logon} />
+                {/* <Route path="/" exact component={Home} /> */}
+
+                {/* <Route path="/login" component={LogonStudent} /> */}
+                <Route path="/" exact component={LogonStudent} />
+
+                <Route path="/loginpro" component={Logon} />
                 <Route path="/register" component={Register} />
+                <Route path="/routine" component={Routine} />
                 
                 <Route path="/profile" component={Profile} />
 

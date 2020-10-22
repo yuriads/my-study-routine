@@ -33,7 +33,7 @@ export default function Register() {
 
                 alert(`Cadastro realizado com sucesso!`);
 
-                history.push('/');
+                history.push('/loginpro');
             }
             } catch(err){
                 alert(`E-mail já cadastrado, tente novamente!`);
@@ -49,9 +49,9 @@ export default function Register() {
                     <h1>Cadastro</h1>
                     <p>Faça o seu cadastro</p>
 
-                    <Link className="back-link" to="/">
+                    <Link className="back-link" to="/loginpro">
                         <FiArrowLeft size={16} color="#1E90FF"/>
-                        Voltar ao início
+                        Voltar a página de Login
                     </Link>
                 </section>
 

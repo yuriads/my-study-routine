@@ -1,3 +1,4 @@
+const crypto = require('crypto');//além de criptografia, o crypto serve para gerar textos aleatórios
 const connection = require('../database/connection');
 
 module.exports = {
@@ -17,16 +18,20 @@ module.exports = {
     },
 
     async create(request, response) {
-        const { registration, name, shift, course, description } = request.body;
+        const { registration, name, shift, course, description, performance } = request.body;
         const user_email = request.headers.authorization;
 
+        const id = crypto.randomBytes(4).toString('HEX');// gera 4 caracteres aleatorios e os transforma para hexadecimal
+
         try {
-            const [id] = await connection('students').insert({
+            await connection('students').insert({
+                id,
                 registration,
                 name,
                 shift,
                 course,
                 description,
+                performance,
                 user_email,
             });
 

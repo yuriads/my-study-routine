@@ -47,6 +47,10 @@
     margin-top: 8px;
 }
 
+.new-student-container .content form button {
+    margin-top: 8px;
+}
+
 .new-student-container .content select {
     background-color: #fff;
     margin-top: 8px;

@@ -3,12 +3,17 @@ const express = require('express');
 const UserController = require('./controllers/UserController');
 const StudentController = require('./controllers/StudentController')
 const SubjectController = require('./controllers/SubjectController');
+
 const ProfileController = require('./controllers/ProfileController');
+const ProfileControllerStudent = require('./controllers/ProfileControllerStudent');
+
 const SessionController = require('./controllers/SessionController');
+const SessionControllerStudent = require('./controllers/SessionControllerStudent');
 
 const routes = express.Router();//estamos colocando o módulo Router dentro de um variável
 
 routes.post('/session', SessionController.create);
+routes.post('/sessionstudent', SessionControllerStudent.create);
 
 
 routes.get('/users', UserController.index);
@@ -20,6 +25,9 @@ routes.delete('/students/:id', StudentController.delete);
 routes.put('/students/:id', StudentController.update);
 
 routes.get('/profile', ProfileController.index);
+
+routes.get('/profilestudent', ProfileControllerStudent.index);
+routes.put('/profilestudent', ProfileControllerStudent.update);
 
 routes.get('/subjects', SubjectController.index);
 routes.post('/subjects', SubjectController.create);

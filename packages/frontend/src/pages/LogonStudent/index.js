@@ -8,21 +8,21 @@ import './styles.css';
 import logoImg from '../../assets/logo6.jpeg';
 
 export default function Logon(){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [id, setId] = useState('');
+    const [name, setName] = useState('');
     const history = useHistory();
 
     async function handleLogin(e) {
         e.preventDefault();
         
         try {
-            const response = await api.post('session', { email, password });
+            const response = await api.post('sessionstudent', { id, name });
 
             //gravando o Id e o Name no Storage para utiliza-los na nossa aplicação
-            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userId', id);
             localStorage.setItem('userName', response.data.name);
 
-            history.push('/profile');
+            history.push('/routine');
         } catch (err) {
             alert('Falha no login, tente novamente.');
         }
@@ -34,26 +34,16 @@ export default function Logon(){
             <section className="form">
 
                 <form onSubmit={handleLogin}>
-                    <h1>Faça o seu Login</h1>
+                    <h1>Bem-vind@</h1>
 
                     <input
-                        type="email"
-                        placeholder="Seu email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Sua senha"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        type="text"
+                        placeholder="Digite seu código de acesso"
+                        value={id}
+                        onChange={e => setId(e.target.value)}
                     />
                     <button className="button" type="submit">Entrar</button>
 
-                    <Link className="back-link" to="/register">
-                        <FiLogIn size={16} color="#1E90FF"/>
-                        Fazer cadastro
-                    </Link>
                     {/* <Link className="back-link" to="/">
                         <FiArrowLeft size={16} color="#1E90FF"/>
                         Voltar ao início

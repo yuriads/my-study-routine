@@ -45,3 +45,7 @@
 .new-subject-container .content form input {
     margin-top: 8px;
 }
+
+.new-subject-container .content form input + button {
+    margin-top: 8px;
+}

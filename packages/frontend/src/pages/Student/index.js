@@ -73,10 +73,12 @@ export default function Student() {
                 <table className="table-hover">
                     <thead className="thead-dark">
                         <tr>
+                            <th>Id</th>
                             <th>Matrícula</th>
                             <th>Nome</th>
                             <th>Turno</th>
                             <th>Curso</th>
+                            <th>Rendimento</th>
                             <th>Acões</th>
                         </tr>
                     </thead>
@@ -84,13 +86,15 @@ export default function Student() {
                     <tbody>
                         {students.map(student => (
                             <tr key={student.id}>
+                                <td>{student.id}</td>
                                 <td>{student.registration}</td>
                                 <td>{student.name}</td>
                                 <td>{student.shift}</td>
                                 <td>{student.course}</td>
+                                <td id="one">{student.performance}</td>
                                 <td>
                                     {/* <Link to={"profile"}> */}
-                                    <button onClick={() => handleStudent(student.id)} type="button">
+                                    <button onClick={() => handleStudent(student.id, student.name)} type="button">
                                         <FiCheck size={20} color="008000" />
                                     </button>
                                     {/* </Link> */}
@@ -99,7 +103,7 @@ export default function Student() {
                                             <FiEdit size={20} color="1E90FF" />
                                         </button>
                                     </Link>
-                                    <button onClick={() => handleDeleteStudent(student.id, student.name)} type="button">
+                                    <button onClick={() => handleDeleteStudent(student.id)} type="button">
                                         <FiX size={20} color="e02041" />
                                     </button>
                                 </td>

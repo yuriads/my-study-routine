@@ -2,12 +2,13 @@ exports.up = function(knex) {
     // o metodo up sempre vai ser para criar uma nova tabela
   // Para criar uma nova tabela
   return knex.schema.createTable('students', function(table) {
-    table.increments('id').primary();//transforma essa coluna em uma primary Key com auto incremento
+    table.string('id').primary();
     table.string('registration').unique().notNullable();
     table.string('name').notNullable();//o notNullablee faz com que esse campo não seja nulo
     table.string('shift').notNullable();
     table.string('course').notNullable();
     table.string('description');
+    table.string('performance');
 
     table.string('user_email').notNullable();
 

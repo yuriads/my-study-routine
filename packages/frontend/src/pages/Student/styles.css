@@ -99,3 +99,8 @@
     background-color: #343a40;
     border-color: #454d55;
   }
+
+  #one {
+      text-align: center;
+      font-weight: bold;
+  }
