@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.string('name').notNullable();//o notNullablee faz com que esse campo não seja nulo
     table.time('start').notNullable();
     table.time('finish').notNullable();
-    table.int('success', 1);
+    table.boolean('disable').defaultTo(false);//modificar depois para inicializar com FALSE
 
     table.string('id_student').notNullable();
 

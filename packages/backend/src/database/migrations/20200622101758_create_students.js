@@ -8,7 +8,8 @@ exports.up = function(knex) {
     table.string('shift').notNullable();
     table.string('course').notNullable();
     table.string('description');
-    table.string('performance');
+    table.integer('count_performance').defaultTo(0);//modificar depois para inicializar com ZERO
+    table.integer('performance');
 
     table.string('user_email').notNullable();
 

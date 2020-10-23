@@ -89,6 +89,27 @@ export default function Profile() {
     //     ))
     // }
 
+    async function handleUpdatePerformance (e) {
+        e.preventDefault();
+
+        //const count_add = 1;
+
+        try {
+            await api.put('profilestudent', 0, {
+                headers: {
+                    Authorization_student: userId,
+                }
+            });
+
+            history.push('/routine');
+
+        } catch (err) {
+            alert('Erro ao atualizar performance!')
+        }
+
+    }
+
+
     return (
         <div className="profile-container">
             <header>
@@ -176,7 +197,7 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button" onClick={handleUpdatePerformance}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
