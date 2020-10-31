@@ -89,25 +89,131 @@ export default function Profile() {
     //     ))
     // }
 
-    async function handleUpdatePerformance (e) {
-        e.preventDefault();
+    async function onClick(id, day, start) {
+        //alert(start)
 
-        //const count_add = 1;
+        const start_verificar1 = start.substr(0, 2);
+        const start_verificar2 = parseInt(start.substr(-2)) + 10;
+        //start_verificar.setMinutes(start.getMinutes() + 10);
 
+        const start_verificar = (start_verificar1 + ':' + start_verificar2);
+
+        const hoje = new Date;
+        const day1 = hoje.getDay();
+        let day2 = '';
+        let minutes = 0;
+
+        if (hoje.getMinutes() < 10) {
+            minutes = '0' + hoje.getMinutes();
+        }else {
+            minutes = hoje.getMinutes();
+        }
+
+        const start1 = hoje.getHours() + ':' + minutes;
+
+        // alert(minutes);
+        // alert(typeof(minutes));
+        // alert(hoje.getMinutes())
+        // alert(start1);
+        // alert(typeof(start1));
+        // alert(start);
+        // alert(day1)
+        // alert(typeof(start_verificar1));
+        // alert(start_verificar1);
+        // alert(start_verificar1.substr(2));
+        // alert(start_verificar2);
+        // alert(start_verificar);
+
+        switch (day1) {
+            case 0:
+                day2 = 'domingo';
+                break;
+            case 1:
+                day2 = 'segunda';
+                break;
+            case 2:
+                day2 = 'terça';
+                break;
+            case 3:
+                day2 = 'quarta';
+                break;
+            case 4:
+                day2 = 'quinta';
+                break;
+            case 5:
+                day2 = 'sexta';
+                break;
+            case 6:
+                day2 = 'sábado';
+                break;
+            default:
+                alert('Erro ao selecionar dia');
+        }
+
+        //alert(day2);
+
+        if (day === day2 && start1 < start_verificar && start1 >= start) {
+            try {
+                await api.put('profilestudent', 0, {
+                    headers: {
+                        Authorization_student: userId,
+                    }
+                });
+
+                history.push('/routine');
+
+            } catch (err) {
+                alert('Erro ao atualizar performance!')
+            }
+        }
         try {
-            await api.put('profilestudent', 0, {
+            await api.put(`profilestudentdisable/${id}`, 0, {
                 headers: {
                     Authorization_student: userId,
                 }
             });
-
-            history.push('/routine');
-
+            //setSubjects(subjects.filter(subject => (subject.id !== id)));
         } catch (err) {
-            alert('Erro ao atualizar performance!')
+            alert('Erro ao desabilitar disciplina');
         }
 
     }
+
+    // async function handleUpdatePerformance(e) {
+    //     e.preventDefault();
+
+    //     //const count_add = 1;
+
+    //     try {
+    //         await api.put('profilestudent', 0, {
+    //             headers: {
+    //                 Authorization_student: userId,
+    //             }
+    //         });
+
+    //         history.push('/routine');
+
+    //     } catch (err) {
+    //         alert('Erro ao atualizar performance!')
+    //     }
+
+
+
+    // };
+
+    // async function handleDisableSubject(id) {
+    //     try {
+    //         await api.put(`profilestudentdisable/${id}`, 0, {
+    //             headers: {
+    //                 Authorization_student: userId,
+    //             }
+    //         });
+    //         //setSubjects(subjects.filter(subject => (subject.id !== id)));
+    //     } catch (err) {
+    //         alert('Erro ao desabilitar disciplina');
+    //     }
+
+    // }
 
 
     return (
@@ -164,7 +270,7 @@ export default function Profile() {
                     <table>
                         <caption>Segunda</caption>
                         <thead>
-                        {/* <h2>Segunda</h2> */}
+                            {/* <h2>Segunda</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -197,7 +303,9 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button" onClick={handleUpdatePerformance}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -209,9 +317,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Terça</caption>
+                        <caption>Terça</caption>
                         <thead>
-                        {/* <h2>Terça</h2> */}
+                            {/* <h2>Terça</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -244,7 +352,8 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -256,9 +365,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Quarta</caption>
+                        <caption>Quarta</caption>
                         <thead>
-                        {/* <h2>Quarta</h2> */}
+                            {/* <h2>Quarta</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -290,7 +399,8 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -302,9 +412,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Quinta</caption>
+                        <caption>Quinta</caption>
                         <thead>
-                        {/* <h2>Quinta</h2> */}
+                            {/* <h2>Quinta</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -336,7 +446,8 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -348,9 +459,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Sexta</caption>
+                        <caption>Sexta</caption>
                         <thead>
-                        {/* <h2>Sexta</h2> */}
+                            {/* <h2>Sexta</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -382,7 +493,8 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -394,9 +506,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Sábado</caption>
+                        <caption>Sábado</caption>
                         <thead>
-                        {/* <h2>Sábado</h2> */}
+                            {/* <h2>Sábado</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -428,7 +540,8 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -440,9 +553,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Domingo</caption>
+                        <caption>Domingo</caption>
                         <thead>
-                        {/* <h2>Domingo</h2> */}
+                            {/* <h2>Domingo</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -474,7 +587,8 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button">
+                                            <button type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>

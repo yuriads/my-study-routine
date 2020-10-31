@@ -7,6 +7,8 @@ const SubjectController = require('./controllers/SubjectController');
 const ProfileController = require('./controllers/ProfileController');
 const ProfileControllerStudent = require('./controllers/ProfileControllerStudent');
 
+const ProfileControllerStudentDisable = require('./controllers/ProfileControllerStudentDisable');
+
 const SessionController = require('./controllers/SessionController');
 const SessionControllerStudent = require('./controllers/SessionControllerStudent');
 
@@ -28,6 +30,8 @@ routes.get('/profile', ProfileController.index);
 
 routes.get('/profilestudent', ProfileControllerStudent.index);
 routes.put('/profilestudent', ProfileControllerStudent.update);
+
+routes.put('/profilestudentdisable/:id', ProfileControllerStudentDisable.update);
 
 routes.get('/subjects', SubjectController.index);
 routes.post('/subjects', SubjectController.create);

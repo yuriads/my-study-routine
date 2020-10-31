@@ -35,6 +35,8 @@ module.exports = {
 
         //const count_add = request.body;
 
+        //const { id } = request.params;
+
         const id_student = request.headers.authorization_student;
 
         const [count] = await connection('subjects')
@@ -43,6 +45,16 @@ module.exports = {
                 id_student: id_student
             })
             .count();
+
+        // let [{ disable }] = await connection('subjects')
+        //     .where('id', id)
+        //     .select('disable')
+
+        // console.log(disable)
+
+        // disable = true;
+
+        // console.log(disable)
 
         let [{ count_performance }] = await connection('students')
             .where({
@@ -73,6 +85,12 @@ module.exports = {
                 count_performance,
                 performance,
             });
+
+        // await connection('subjects')
+        //     .where('id', id)
+        //     .update({
+        //         disable
+        //     })
 
         return response.status(204).send(''); //o status 204 é quando retornamos uma mensagem de sucesso sem corpo para o nosso frontend
 
