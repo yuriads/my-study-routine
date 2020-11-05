@@ -17,6 +17,7 @@ module.exports = {
 
     async create (request, response) {
         const { day, name, start, finish } = request.body;
+        const disable = 0;
         const id_student = request.headers.authorization;
 
         
@@ -26,6 +27,7 @@ module.exports = {
             name,
             start,
             finish,
+            disable,
             id_student,
         });
 

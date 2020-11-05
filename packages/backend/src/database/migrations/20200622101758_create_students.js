@@ -9,7 +9,7 @@ exports.up = function(knex) {
     table.string('course').notNullable();
     table.string('description');
     table.integer('count_performance').defaultTo(0);//modificar depois para inicializar com ZERO
-    table.integer('performance');
+    table.integer('performance').defaultTo(0);
 
     table.string('user_email').notNullable();
 

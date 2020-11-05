@@ -9,6 +9,7 @@ import './styles.css';
 
 export default function Profile() {
     const [subjects, setSubjects] = useState([]);
+    const [submitting, setSubmitting] = useState();
     // const [students, setStudents] = useState([]);
     const [day, setDay] = useState('');
 
@@ -89,7 +90,7 @@ export default function Profile() {
     //     ))
     // }
 
-    async function onClick(id, day, start) {
+    async function onClick(id, day, start, disable) {
         //alert(start)
 
         const start_verificar1 = start.substr(0, 2);
@@ -101,16 +102,30 @@ export default function Profile() {
         const hoje = new Date;
         const day1 = hoje.getDay();
         let day2 = '';
+        let hours = 0;
         let minutes = 0;
+        let start1 = '';
 
-        if (hoje.getMinutes() < 10) {
+        if (hoje.getHours() < 10 && hoje.getMinutes() < 10) {
+            hours = '0' + hoje.getHours();
             minutes = '0' + hoje.getMinutes();
-        }else {
-            minutes = hoje.getMinutes();
+            start1 = hours + ':' + minutes;
+        } else if (hoje.getHours() < 10 && hoje.getMinutes() >= 10) {
+            hours = '0' + hoje.getHours();
+            start1 = hours + ':' + hoje.getMinutes();
+        } else if (hoje.getHours() >= 10 && hoje.getMinutes() < 10) {
+            minutes = '0' + hoje.getMinutes();
+            start1 = hoje.getHours() + ':' + minutes;
+        } else {
+            start1 = hoje.getHours() + ':' + hoje.getMinutes();
         }
 
-        const start1 = hoje.getHours() + ':' + minutes;
-
+        // alert(id)
+        // alert(hours)
+        // alert(minutes)
+        // alert(typeof (parseInt(disable)))
+        // alert(disable);
+        //alert(typeof(id))
         // alert(minutes);
         // alert(typeof(minutes));
         // alert(hoje.getMinutes())
@@ -118,6 +133,7 @@ export default function Profile() {
         // alert(typeof(start1));
         // alert(start);
         // alert(day1)
+        // alert(day)
         // alert(typeof(start_verificar1));
         // alert(start_verificar1);
         // alert(start_verificar1.substr(2));
@@ -152,6 +168,30 @@ export default function Profile() {
 
         //alert(day2);
 
+        if (day !== day2) {
+            alert("Hoje é " + day2);
+            return;
+        } else if (day === day2 && start1 < start) {
+            alert('Ainda não está no horário de iniciar a disciplina!')
+            return;
+        } else if (day === day2 && start1 >= start_verificar) {
+            alert('Passou do horário limite para inicar a disciplina!');
+            try {
+                await api.put(`profilestudentdisable/${id}`, 1, {
+                    headers: {
+                        Authorization_student: userId,
+                    }
+                });
+                window.location.reload();
+
+                //setSubjects(subjects.filter(subject => (subject.id !== id)));
+            } catch (err) {
+                alert('Erro ao desabilitar disciplina');
+            }
+            window.location.reload();
+            return;
+        }
+
         if (day === day2 && start1 < start_verificar && start1 >= start) {
             try {
                 await api.put('profilestudent', 0, {
@@ -160,22 +200,27 @@ export default function Profile() {
                     }
                 });
 
-                history.push('/routine');
+                alert("Parabéns, sua performace melhorou!")
+                window.location.reload()
 
             } catch (err) {
                 alert('Erro ao atualizar performance!')
             }
         }
+
         try {
-            await api.put(`profilestudentdisable/${id}`, 0, {
+            await api.put(`profilestudentdisable/${id}`, 1, {
                 headers: {
                     Authorization_student: userId,
                 }
             });
+            window.location.reload();
+
             //setSubjects(subjects.filter(subject => (subject.id !== id)));
         } catch (err) {
             alert('Erro ao desabilitar disciplina');
         }
+        window.location.reload();
 
     }
 
@@ -305,7 +350,9 @@ export default function Profile() {
                                         <td>
                                             <button
                                                 type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -352,8 +399,11 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -399,8 +449,11 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -446,8 +499,11 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -493,8 +549,11 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -540,8 +599,11 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>
@@ -587,8 +649,11 @@ export default function Profile() {
                                             </button>
                                         </td> */}
                                         <td>
-                                            <button type="button"
-                                                onClick={() => onClick(subject.id, subject.day, subject.start)}>
+                                            <button
+                                                type="button"
+                                                onClick={() => onClick(subject.id, subject.day, subject.start, subject.disable)}
+                                                disabled={subject.disable === 1}
+                                            >
                                                 <FiThumbsUp size={20} color="008000" />
                                             </button>
                                         </td>

@@ -22,7 +22,7 @@ module.exports = {
             .where({
                 id_student: id_student
             })
-            .select('subjects.id', 'subjects.day', 'subjects.name', 'subjects.start', 'subjects.finish')
+            .select('subjects.id', 'subjects.day', 'subjects.name', 'subjects.start', 'subjects.finish', 'subjects.disable')
             .orderBy('start');
 
         response.header('X-Total-Count-Subject', count['count(*)']);

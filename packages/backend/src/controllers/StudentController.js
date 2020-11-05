@@ -8,9 +8,9 @@ module.exports = {
         const [count] = await connection('students').count();
 
         const students = await connection('students')
-        .where('user_email', user_email)
-        .select('*')
-        .orderBy('name');
+            .where('user_email', user_email)
+            .select('*')
+            .orderBy('name');
 
         response.header('X-Total-Count', count['count(*)']);
 
@@ -75,18 +75,18 @@ module.exports = {
             return response.status(401).json({ error: 'Operação não permitida' });// o status 401 significa não autorizado. depois passamos um objeto com uma mensagem de erro
         }
 
-        try{
-        await connection('students')
-            .where('id', id)
-            .update({
-                registration,
-                name,
-                shift,
-                course,
-                description,
-            });
+        try {
+            await connection('students')
+                .where('id', id)
+                .update({
+                    registration,
+                    name,
+                    shift,
+                    course,
+                    description,
+                });
 
-        return response.status(204).send(''); //o status 204 é quando retornamos uma mensagem de sucesso sem corpo para o nosso frontend
+            return response.status(204).send(''); //o status 204 é quando retornamos uma mensagem de sucesso sem corpo para o nosso frontend
         } catch (err) {
             return response.status(400).json({ error: 'Matrícula já cadastrado' });
         }
