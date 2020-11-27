@@ -18,7 +18,7 @@ module.exports = {
     },
 
     async create(request, response) {
-        const { registration, name, shift, course, description, performance } = request.body;
+        const { registration, name, shift, course, description, performance = 0 } = request.body;
         const user_email = request.headers.authorization;
 
         const id = crypto.randomBytes(4).toString('HEX');// gera 4 caracteres aleatorios e os transforma para hexadecimal

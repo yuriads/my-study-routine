@@ -9,7 +9,7 @@ import './styles.css';
 
 export default function Profile() {
     const [subjects, setSubjects] = useState([]);
-    const [submitting, setSubmitting] = useState();
+    const [redimento, setRendimento] = useState('')
     // const [students, setStudents] = useState([]);
     const [day, setDay] = useState('');
 
@@ -24,7 +24,7 @@ export default function Profile() {
 
     const history = useHistory();
 
-    const userName = localStorage.getItem('userName');
+    const userName = localStorage.getItem('userNameStudent');
     const userId = localStorage.getItem('userId');
 
     // const id_student = localStorage.getItem('id_student');
@@ -224,42 +224,20 @@ export default function Profile() {
 
     }
 
-    // async function handleUpdatePerformance(e) {
-    //     e.preventDefault();
-
-    //     //const count_add = 1;
-
-    //     try {
-    //         await api.put('profilestudent', 0, {
-    //             headers: {
-    //                 Authorization_student: userId,
-    //             }
-    //         });
-
-    //         history.push('/routine');
-
-    //     } catch (err) {
-    //         alert('Erro ao atualizar performance!')
-    //     }
-
-
-
-    // };
-
-    // async function handleDisableSubject(id) {
-    //     try {
-    //         await api.put(`profilestudentdisable/${id}`, 0, {
-    //             headers: {
-    //                 Authorization_student: userId,
-    //             }
-    //         });
-    //         //setSubjects(subjects.filter(subject => (subject.id !== id)));
-    //     } catch (err) {
-    //         alert('Erro ao desabilitar disciplina');
-    //     }
-
-    // }
-
+    async function performance (performace) {
+        try {
+            await api.get('studentcontrollerperformance', {
+                headers: {
+                    Authorization_student: userId,
+                }
+            }).then(response => {
+                setRendimento(response.data);
+                alert('Seu rendimento está em '+ response.data + '%');
+            });
+        } catch (err) {
+            alert('Erro ao informar rendimento!')
+        }
+    }
 
     return (
         <div className="profile-container">
@@ -267,45 +245,13 @@ export default function Profile() {
                 <img src={logoImg} alt="My Stdudy Routine" />
                 <span>Bem vindo, {userName}</span>
                 <section>
-                    <Link className="button">Rendimento</Link>
+                    <Link className="button" onClick={performance}>Rendimento</Link>
                     {/* <Link to={'/students'}>
                         <button className="button">Alunos</button>
                     </Link> */}
                     <Link className="button" onClick={handleLogout}>Sair</Link>
                 </section>
             </header>
-
-            {/* <h1>Aluno: {name_student}</h1> */}
-            {/* <h2>Semana 1</h2> */}
-
-            {/* <div className="aluno">
-
-                <select onClick={handleSelectStudent}>
-                    <option disabled selected>
-                        Selecione um aluno
-                    </option>
-                    {students.map(student => (
-
-                        <option value={students}>{student.name}</option>
-                    ))}
-                </select>
-
-                <Link to={'/students/new'}>
-                    <buttton className="button">Cadastrar</buttton>
-                </Link>
-
-                <Link to={`/students/update/${id}`}>
-                    <buttton className="button">Atualizar</buttton>
-                </Link>
-
-                <Link to={'/students/new'}>
-                    <buttton className="button">Deletar</buttton>
-                </Link>
-
-                <Link to={'/students/new'}>
-                    <buttton className="button">Imprimir</buttton>
-                </Link>
-            </div> */}
 
             <h2>Rotina de estudo</h2>
 

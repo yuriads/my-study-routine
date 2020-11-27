@@ -111,3 +111,30 @@
 .dia-semana button:hover{
     opacity: 0.5;
 }
+
+@media (max-width: 900px) {
+    .dia-semana {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 24px;
+    }
+}
+
+@media (max-width: 639px) {
+    .dia-semana {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 24px;
+    }
+    .profile-container header{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .profile-container header section {
+    margin-left: 0;
+    }
+    .profile-container header span {
+        margin-left: 0;
+        padding-bottom: 10px;
+    }
+}

@@ -106,12 +106,12 @@ export default function UpdateSubject(props) {
                 <form onSubmit={handleUpdateStudent}>
                     <input
                         placeholder="Matrícula"
-                        value={registration}
+                        value={registration.toUpperCase()}
                         onChange={e => setRegistration(e.target.value)}
                     />
                     <input
                         placeholder="Nome do aluno"
-                        value={name}
+                        value={name.toUpperCase()}
                         onChange={e => setName(e.target.value)}
                     />
                     <select value={shift} onChange={e => setShift(e.target.value)}>

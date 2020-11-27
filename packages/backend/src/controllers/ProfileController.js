@@ -15,7 +15,7 @@ module.exports = {
                 user_email: user_email,
                 id_student: id_student
             })
-            .select('subjects.id', 'subjects.day','subjects.name', 'subjects.start', 'subjects.finish')
+            .select('subjects.id', 'subjects.day','subjects.name', 'subjects.start', 'subjects.finish', 'subjects.disable')
             .orderBy('start');
 
         return response.json(subjects);

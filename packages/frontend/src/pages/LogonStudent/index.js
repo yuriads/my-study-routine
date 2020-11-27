@@ -20,7 +20,7 @@ export default function Logon(){
 
             //gravando o Id e o Name no Storage para utiliza-los na nossa aplicação
             localStorage.setItem('userId', id);
-            localStorage.setItem('userName', response.data.name);
+            localStorage.setItem('userNameStudent', response.data.name);
 
             history.push('/routine');
         } catch (err) {

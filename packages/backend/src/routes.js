@@ -4,6 +4,8 @@ const UserController = require('./controllers/UserController');
 const StudentController = require('./controllers/StudentController')
 const SubjectController = require('./controllers/SubjectController');
 
+const StudentControllerPerformance = require('./controllers/StudentControllerPerformance');
+
 const ProfileController = require('./controllers/ProfileController');
 const ProfileControllerStudent = require('./controllers/ProfileControllerStudent');
 
@@ -25,6 +27,8 @@ routes.get('/students', StudentController.index);
 routes.post('/students', StudentController.create);
 routes.delete('/students/:id', StudentController.delete);
 routes.put('/students/:id', StudentController.update);
+
+routes.get('/studentcontrollerperformance', StudentControllerPerformance.index);
 
 routes.get('/profile', ProfileController.index);
 
