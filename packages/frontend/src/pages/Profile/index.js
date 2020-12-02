@@ -9,7 +9,7 @@ import './styles.css';
 
 export default function Profile() {
     const [subjects, setSubjects] = useState([]);
-    // const [students, setStudents] = useState([]);
+    const [students, setStudents] = useState([]);
     const [day, setDay] = useState('');
 
 
@@ -40,6 +40,18 @@ export default function Profile() {
         }).then(response => {
             setSubjects(response.data);
         });
+
+    }, [userEmail]);
+
+    useEffect(() => {
+        api.get('profiledescription', {
+            headers: {
+                // Authorization: userEmail,
+                Authorization_student: id_student
+            },
+        }).then(response => {
+            setStudents(response.data);
+        });
     }, [userEmail]);
 
 
@@ -68,6 +80,7 @@ export default function Profile() {
                 headers: {
                     Authorization: id_student,
                 },
+
             });
 
             //depois usar a font FIRA CODE - FONT LIGATURES
@@ -76,6 +89,26 @@ export default function Profile() {
             alert('Erro ao deletar, tente novamente!');
         }
     }
+
+
+    async function handleDeleteRoutine() {
+        try {
+            await api.delete(`profiledeleteroutine`, {
+                headers: {
+                    Authorization_student: id_student,
+                    Authorization: userEmail,
+                },
+
+            });
+
+            //depois usar a font FIRA CODE - FONT LIGATURES
+            //setSubjects(subjects.filter(subject => (subject.id !== id)));
+        } catch (err) {
+            alert('Erro ao deletar, tente novamente!');
+        }
+       window.location.reload();
+    }
+
 
     function handleLogout() {
         localStorage.clear();
@@ -89,12 +122,15 @@ export default function Profile() {
     //     ))
     // }
 
+
+
     return (
         <div className="profile-container">
             <header>
                 <img src={logoImg} alt="My Stdudy Routine" />
                 <span>Bem vindo, {userName}</span>
                 <section>
+                    <Link> <button className="button" onClick={handleDeleteRoutine}>Limpar R.</button></Link>
                     {/* <Link className="button">Relatório</Link> */}
                     <Link to={'/students'}>
                         <button className="button">Alunos</button>
@@ -143,7 +179,7 @@ export default function Profile() {
                     <table>
                         <caption>Segunda</caption>
                         <thead>
-                        {/* <h2>Segunda</h2> */}
+                            {/* <h2>Segunda</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -183,9 +219,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Terça</caption>
+                        <caption>Terça</caption>
                         <thead>
-                        {/* <h2>Terça</h2> */}
+                            {/* <h2>Terça</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -225,9 +261,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Quarta</caption>
+                        <caption>Quarta</caption>
                         <thead>
-                        {/* <h2>Quarta</h2> */}
+                            {/* <h2>Quarta</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -266,9 +302,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Quinta</caption>
+                        <caption>Quinta</caption>
                         <thead>
-                        {/* <h2>Quinta</h2> */}
+                            {/* <h2>Quinta</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -307,9 +343,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Sexta</caption>
+                        <caption>Sexta</caption>
                         <thead>
-                        {/* <h2>Sexta</h2> */}
+                            {/* <h2>Sexta</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -348,9 +384,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Sábado</caption>
+                        <caption>Sábado</caption>
                         <thead>
-                        {/* <h2>Sábado</h2> */}
+                            {/* <h2>Sábado</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -389,9 +425,9 @@ export default function Profile() {
 
                 <div>
                     <table>
-                    <caption>Domingo</caption>
+                        <caption>Domingo</caption>
                         <thead>
-                        {/* <h2>Domingo</h2> */}
+                            {/* <h2>Domingo</h2> */}
                             <tr>
                                 <th>Disciplina</th>
                                 <th>Início</th>
@@ -428,10 +464,17 @@ export default function Profile() {
                     </table>
                     <div className="obs">
                         <h2>Observções</h2>
-                        <textarea name="" id="" cols="30" rows="5">
+                        {/* <textarea name="" id="" cols="30" rows="5"> */}
+                        <div className="aluno">
+                            <label>
+                                {students.map(student => (
+                                    student.description
+                                ))}
+                            </label>
 
-                        </textarea>
-                        <button className="button">Adicionar Obs</button>
+                        </div>
+                        {/* </textarea> */}
+                        {/* <button className="button">Adicionar Obs</button> */}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,8 @@ const StudentControllerPerformance = require('./controllers/StudentControllerPer
 
 const ProfileController = require('./controllers/ProfileController');
 const ProfileControllerStudent = require('./controllers/ProfileControllerStudent');
+const ProfileControllerDescription = require('./controllers/ProfileControllerDescription');
+const ProfileControllerDeleteRoutine = require('./controllers/ProfileControllerDeleteRoutine');
 
 const ProfileControllerStudentDisable = require('./controllers/ProfileControllerStudentDisable');
 
@@ -31,6 +33,8 @@ routes.put('/students/:id', StudentController.update);
 routes.get('/studentcontrollerperformance', StudentControllerPerformance.index);
 
 routes.get('/profile', ProfileController.index);
+routes.get('/profiledescription', ProfileControllerDescription.index);
+routes.delete('/profiledeleteroutine', ProfileControllerDeleteRoutine.delete);
 
 routes.get('/profilestudent', ProfileControllerStudent.index);
 routes.put('/profilestudent', ProfileControllerStudent.update);

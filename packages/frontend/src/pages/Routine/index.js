@@ -9,7 +9,7 @@ import './styles.css';
 
 export default function Profile() {
     const [subjects, setSubjects] = useState([]);
-    const [redimento, setRendimento] = useState('')
+    const [rendimento, setRendimento] = useState('')
     // const [students, setStudents] = useState([]);
     const [day, setDay] = useState('');
 

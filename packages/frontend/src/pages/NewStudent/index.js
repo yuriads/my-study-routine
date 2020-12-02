@@ -13,6 +13,8 @@ export default function NewStudent() {
     const [name, setName] = useState('');
     const [shift, setShift] = useState('');
     const [course, setCourse] = useState('');
+    const [date_start, setDate_start] = useState('');
+    const [date_finish, setDate_finish] = useState('');
     const [description, setDescription] = useState('');
     const [students, setStudents] = useState([]);
 
@@ -43,6 +45,8 @@ export default function NewStudent() {
             name,
             shift,
             course,
+            date_start,
+            date_finish,
             description,
         };
 
@@ -51,7 +55,7 @@ export default function NewStudent() {
                 headers: {
                     Authorization: userEmail,
                 }
-                
+
             });
 
             alert(`Seu ID de acesso: ${response.data.id}`);
@@ -99,6 +103,18 @@ export default function NewStudent() {
                             <option value={item.course}>{item.course}</option>
                         ))}
                     </select>
+                    <input
+                        type="date"
+                        placeholder="Data início"
+                        value={date_start}
+                        onChange={e => setDate_start(e.target.value)}
+                    />
+                    <input
+                        type="date"
+                        placeholder="Data Término"
+                        value={date_finish}
+                        onChange={e => setDate_finish(e.target.value)}
+                    />
                     <textarea rows='100'
                         placeholder="Descrição"
                         value={description}

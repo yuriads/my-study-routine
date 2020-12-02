@@ -7,6 +7,8 @@ exports.up = function(knex) {
     table.string('name').notNullable();//o notNullablee faz com que esse campo não seja nulo
     table.string('shift').notNullable();
     table.string('course').notNullable();
+    table.date('date_start').notNullable();
+    table.date('date_finish').notNullable();
     table.string('description');
     table.integer('count_performance').defaultTo(0);//modificar depois para inicializar com ZERO
     table.integer('performance').defaultTo(0);

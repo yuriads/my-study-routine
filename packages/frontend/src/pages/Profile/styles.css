@@ -57,6 +57,14 @@
     margin-bottom: 40px;
 }
 
+.aluno label{
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
 .aluno select {
     width: 48%;
     height: 60px;
