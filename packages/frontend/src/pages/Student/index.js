@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiCheck, FiEdit, FiX} from 'react-icons/fi';
+import { FiCheck, FiEdit, FiX } from 'react-icons/fi';
 
 
 import api from '../../services/api';
@@ -78,6 +78,7 @@ export default function Student() {
                             <th>Nome</th>
                             <th>Turno</th>
                             <th>Curso</th>
+                            <th>Data Retorno</th>
                             <th>Rendimento</th>
                             <th>Acões</th>
                         </tr>
@@ -91,6 +92,7 @@ export default function Student() {
                                 <td>{student.name}</td>
                                 <td>{student.shift}</td>
                                 <td>{student.course}</td>
+                                <td>{student.date_finish}</td>
                                 <td id="one">{student.performance}</td>
                                 <td>
                                     {/* <Link to={"profile"}> */}
@@ -98,7 +100,7 @@ export default function Student() {
                                         <FiCheck size={20} color="008000" />
                                     </button>
                                     {/* </Link> */}
-                                    <Link to={`students/update/${student.id}/${student.registration}/${student.name}/${student.shift}/${student.course}/${student.description}`}>
+                                    <Link to={`students/update/${student.id}/${student.registration}/${student.name}/${student.shift}/${student.course}/${student.date_start}/${student.date_finish}/${student.description}`}>
                                         <button type="button">
                                             <FiEdit size={20} color="1E90FF" />
                                         </button>

@@ -13,6 +13,8 @@ export default function UpdateSubject(props) {
     const [name, setName] = useState('');
     const [shift, setShift] = useState('');
     const [course, setCourse] = useState('');
+    const [date_start, setDate_start] = useState('');
+    const [date_finish, setDate_finish] = useState('');
     const [description, setDescription] = useState('');
     const [students, setStudents] = useState([]);
 
@@ -49,11 +51,13 @@ export default function UpdateSubject(props) {
             //         setStart(subject.start),
             //         setFinish(subject.finish)
             // ))
-            
+
             setRegistration(props.match.params.registration);
             setName(props.match.params.name);
             setShift(props.match.params.shift);
             setCourse(props.match.params.course);
+            setDate_start(props.match.params.date_start);
+            setDate_finish(props.match.params.date_finish);
             setDescription(props.match.params.description);
 
         });
@@ -71,6 +75,8 @@ export default function UpdateSubject(props) {
             name,
             shift,
             course,
+            date_start,
+            date_finish,
             description,
         };
 
@@ -124,6 +130,18 @@ export default function UpdateSubject(props) {
                             <option value={item.course}>{item.course}</option>
                         ))}
                     </select>
+                    <input
+                        type="date"
+                        placeholder="Data início"
+                        value={date_start}
+                        onChange={e => setDate_start(e.target.value)}
+                    />
+                    <input
+                        type="date"
+                        placeholder="Data Término"
+                        value={date_finish}
+                        onChange={e => setDate_finish(e.target.value)}
+                    />
                     <textarea rows='100'
                         placeholder="Descrição"
                         value={description}

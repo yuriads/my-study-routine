@@ -33,7 +33,7 @@ export default function Routes() {
 
                 <Route path="/students" exact component={Student}/>
                 <Route path="/students/new" component={NewStudent} />
-                <Route path="/students/update/:id/:registration/:name/:shift/:course/:description" component={UpdateStudent} />
+                <Route path="/students/update/:id/:registration/:name/:shift/:course/:date_start/:date_finish/:description" component={UpdateStudent} />
 
             </Switch>
         </BrowserRouter>

@@ -10,7 +10,7 @@ import './styles.css';
 export default function Profile() {
     const [subjects, setSubjects] = useState([]);
     const [rendimento, setRendimento] = useState('')
-    // const [students, setStudents] = useState([]);
+    const [students, setStudents] = useState([]);
     const [day, setDay] = useState('');
 
 
@@ -32,6 +32,24 @@ export default function Profile() {
 
 
     //o useEfect recebe dois parâmetros, o primeiro é que a função irá executar e o segundo é quando ela irá executar
+
+
+    useEffect(() => {
+        api.get('profiledescription', {
+            headers: {
+                // Authorization: userEmail,
+                Authorization_student: userId,
+            },
+        }).then(response => {
+            setStudents(response.data);
+        });
+    }, [userId]);
+
+
+    students.map(student => (
+        student.date_start
+    ))
+
     useEffect(() => {
         api.get('profilestudent', {
             headers: {
@@ -224,7 +242,7 @@ export default function Profile() {
 
     }
 
-    async function performance (performace) {
+    async function performance(performace) {
         try {
             await api.get('studentcontrollerperformance', {
                 headers: {
@@ -232,7 +250,7 @@ export default function Profile() {
                 }
             }).then(response => {
                 setRendimento(response.data);
-                alert('Seu rendimento está em '+ response.data + '%');
+                alert('Seu rendimento está em ' + response.data + '%');
             });
         } catch (err) {
             alert('Erro ao informar rendimento!')
@@ -253,7 +271,16 @@ export default function Profile() {
                 </section>
             </header>
 
+
             <h2>Rotina de estudo</h2>
+            <h3>Semana</h3>
+
+            <div className="rotina-semana">
+                <button className="button">1</button>
+                <button className="button">2</button>
+                <button className="button">3</button>
+                <button className="button">4</button>
+            </div>
 
             <div className="dia-semana">
 

@@ -106,7 +106,7 @@ export default function Profile() {
         } catch (err) {
             alert('Erro ao deletar, tente novamente!');
         }
-       window.location.reload();
+        window.location.reload();
     }
 
 
@@ -466,12 +466,16 @@ export default function Profile() {
                         <h2>Observções</h2>
                         {/* <textarea name="" id="" cols="30" rows="5"> */}
                         <div className="aluno">
-                            <label>
-                                {students.map(student => (
-                                    student.description
-                                ))}
-                            </label>
 
+                            <table>
+                                <tbody>
+                                    <label>
+                                        {students.map(student => (
+                                            student.description
+                                        ))}
+                                    </label>
+                                </tbody>
+                            </table>
                         </div>
                         {/* </textarea> */}
                         {/* <button className="button">Adicionar Obs</button> */}

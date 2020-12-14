@@ -65,7 +65,7 @@ module.exports = {
     async update(request, response) {
         // pegando o id que vem por parâmetro
         const { id } = request.params;
-        const { registration, name, shift, course, description } = request.body;
+        const { registration, name, shift, course, date_start, date_finish, description } = request.body;
         const user_email = request.headers.authorization;//usamos o user_email para saber se o student que estamos deletando realmente foi criado pelo o usuário
 
         const student = await connection('students')
@@ -85,6 +85,8 @@ module.exports = {
                     name,
                     shift,
                     course,
+                    date_start,
+                    date_finish,
                     description,
                 });
 
